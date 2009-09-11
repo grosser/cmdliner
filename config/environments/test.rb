@@ -22,7 +22,7 @@ config.action_controller.allow_forgery_protection    = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-# Use SQL instead of Active Record's schema dumper when creating the test database.
-# This is necessary if your schema can't be completely dumped by the schema dumper,
-# like if you have constraints or database-specific column types
-# config.active_record.schema_format = :sql
+config.gem "rspec", :version=>">=1.2.8", :lib=>false
+config.gem "rspec-rails", :version=>">=1.2.7.1", :lib=>false
+config.gem "spork", :version=>">=0.5.11", :lib=>false
+config.gem "thoughtbot-factory_girl", :version=>'>=1.2.2', :lib => "factory_girl", :source => "http://gems.github.com"

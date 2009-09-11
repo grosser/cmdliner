@@ -1,0 +1,16 @@
+<%
+{
+  :error=>{:color=>'red', :default=>'FAIL!'},
+  :notice=>{:color=>'green', :default=>'SUCCESS!'}
+}.each do |k, v|
+%>
+  <% if flash and flash[k] %>
+    <div style="color:<%=v[:color]%>">
+      <% if flash[k] == :default %>
+        <%= v[:default] %>
+      <% else %>
+        <%= flash[k] %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
