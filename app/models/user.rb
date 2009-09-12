@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   before_create :clean_name, :uniquify_name, :remove_email_when_taken
 
+  attr_accessible :name, :email, :website, :identifier
+
   def to_s
     name
   end

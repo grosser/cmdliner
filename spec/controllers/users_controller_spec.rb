@@ -30,4 +30,17 @@ describe UsersController do
       it_redirects '/'
     end
   end
+
+  describe :update do
+    before do
+      @user = Factory(:user)
+      login_as @user
+    end
+
+    it "does not allow to set admin" do
+      put :update, :user=>{:admin=>true}, :id=>@user.id
+      it_redirects @user
+      @user.reload.admin.should == false
+    end
+  end
 end
