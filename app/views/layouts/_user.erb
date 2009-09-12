@@ -1,3 +1,5 @@
 <% if current_user %>
-  Hello <%= link_to_s current_user %>
+  Hello <%= link_to_s current_user %>, <%= link_to 'logout', current_user, :method=>:delete%>
+<% else %>
+  Hi stranger, please <%= link_to 'login!', login_path %>
 <% end %>
