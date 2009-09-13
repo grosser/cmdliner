@@ -8,4 +8,8 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
 end
 
+# load everything from lib/ext
+Dir["#{RAILS_ROOT}/lib/ext/**/*.rb"].each{|file| require file.sub('.rb','') }
+
+# initialize plugins/gems
 RPXNow.api_key = 'd32a482b8a63a6e94a4e7c8422b78047392c6ef5'
