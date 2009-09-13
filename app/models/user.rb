@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
     return true if admin?
     case object
     when User then anonymouse?
+    when Command then false
     else raise "NOT SUPPORTED"
     end
   end
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
     return true if admin?
     case object
     when User then object == self
+    when Command then false
     else raise "NOT SUPPORTED"
     end
   end
@@ -33,7 +35,7 @@ class User < ActiveRecord::Base
   def can_read?(object)
     return true if admin?
     case object
-    when User then true
+    when User, Command then true
     else raise "NOT SUPPORTED"
     end
   end

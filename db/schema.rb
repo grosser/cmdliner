@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090910191750) do
+ActiveRecord::Schema.define(:version => 20090913103817) do
+
+  create_table "commands", :force => true do |t|
+    t.string   "name",                           :null => false
+    t.text     "description",                    :null => false
+    t.boolean  "mac_only",    :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commands", ["name"], :name => "index_commands_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name",                          :null => false

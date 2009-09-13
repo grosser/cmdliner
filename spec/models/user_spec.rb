@@ -13,6 +13,16 @@ describe User do
       behaves_like_owner_changeable(user)
     end
 
+    it "Command" do
+      behaves_like_static(Factory(:command))
+    end
+
+    def behaves_like_static(item)
+      check_can(:read, true, true, true, item)
+      check_can(:write, false, false, false, item)
+      check_can(:create, false, false, false, item)
+    end
+
     def behaves_like_owner_changeable(item)
       check_can(:read, true, true, true, item)
       check_can(:write, true, false, false, item)

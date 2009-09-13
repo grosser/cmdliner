@@ -1,16 +1,20 @@
 <html>
   <head>
-    <title>CMDLiner</title>
+    <title><%=title%> | CmdLiner.com</title>
     <link rel="shortcut icon" href="favicon.ico" >
     <%= css_tag 'reset' %>
   </head>
   <body>
     <div>
-      <%= render 'layouts/user' %>
+      <div>
+        <%= render 'layouts/menu' %>
+        <%= render 'layouts/user' %>
+      </div>
       <%= render 'layouts/flash' %>
     </div>
 
     <div>
+      <h1><%=title%></h1>
       <%= yield %>
     </div>
   </body>

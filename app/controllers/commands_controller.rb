@@ -1,0 +1,2 @@
+class CommandsController < RestfulController
+end
