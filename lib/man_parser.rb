@@ -2,12 +2,22 @@ class ManParser
   def self.parse(cmd)
     text = `man #{cmd}`
     sections = sections(text)
-    puts sections.inspect
     description, options = parse_description(sections['DESCRIPTION'])
-    {:description => description.join(''), :options=>options, :sections=>sections}
+    options = parse_options(options)
+    {:description => description.map(&:strip).join(''), :options=>options, :sections=>sections}
   end
 
   private
+
+  def self.parse_options(options)
+    options.map{|option| parse_option(option) }
+  end
+
+  def self.parse_option(option)
+    if option.join(' ') =~ /-(\w+), --(\w+)(.*)/
+      {:name=>$1, :alias=>$2, :description=>$3.strip}
+    end
+  end
 
   def self.parse_description(text)
     in_option = false
@@ -23,8 +33,7 @@ class ManParser
         in_option = false
       end
 
-      line = line.strip
-      next if line.empty?
+      next if line.strip.empty?
 
       if in_option
         options.last << line
