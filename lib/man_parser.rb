@@ -14,9 +14,15 @@ class ManParser
   end
 
   def self.parse_option(option)
-    if option.join(' ') =~ /-(\w+), --(\w+)(.*)/
-      {:name=>$1, :alias=>$2, :description=>$3.strip}
+    option = option.join(' ')
+    found = if option =~ /^\s+-(\w+), --([-\w]+)(.*)/
+      {:alias=>$1, :name=>$2, :description=>$3}
+    elsif option =~ /^\s+-[-]?([-\w]+)(.*)/
+      {:name=>$1, :description=>$2}
     end
+    return unless found
+    found[:description] = found[:description].to_s.strip.gsub(/\s{2,}/, ' ')
+    found
   end
 
   def self.parse_description(text)

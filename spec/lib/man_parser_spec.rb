@@ -12,24 +12,36 @@ describe ManParser do
     end
 
     describe 'options' do
+      def options
+        ManParser.parse('ls')[:options]
+      end
+
       it "finds all options" do
-        d = ManParser.parse('ls')[:options]
-        d.size.should == 60
+        options.size.should == 60
       end
 
       it "extracts the name" do
-        d = ManParser.parse('ls')[:options]
-        d.first[:name].should == 'a'
+        options.first[:name].should == 'all'
       end
 
       it "extracts the alias" do
-        d = ManParser.parse('ls')[:options]
-        d.first[:alias].should == 'all'
+        options.first[:alias].should == 'a'
       end
 
       it "extracts the description" do
-        d = ManParser.parse('ls')[:options]
-        d.first[:description].should == 'do not ignore entries starting with .'
+        options.first[:description].should == 'do not ignore entries starting with .'
+      end
+
+      it "understands format with only name (--author)" do
+        options[2].should == {:name=>'author', :description=>'with -l, print the author of each file'}
+      end
+
+      it "understands format with parameters --x=SIZE" do
+        options[4].should == {:name=>"block-size", :description=>"=SIZE use SIZE-byte blocks"}
+      end
+
+      it "userstands single-line style" do
+        options[7].should == {:name=>"C", :description=>"list entries by columns"}
       end
     end
   end
