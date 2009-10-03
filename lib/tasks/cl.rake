@@ -3,7 +3,9 @@ namespace :cl do
   task :generate_commands  => :environment do
     ManParser.available_commands.each do |cmd|
       next if Command.find_by_name(cmd)
+      puts "now #{cmd}"
       data = ManParser.parse(cmd)
+      next if data.empty?
       cmd = Command.new(:name=>cmd, :description => data[:description])
       data[:options].each do |option|
         cmd.options.build(option)
