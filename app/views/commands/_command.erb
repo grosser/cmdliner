@@ -1,3 +1,6 @@
-<h2><%= command.name %></h2>
-<%= command.description %> <br />
+<h2><%= link_to_s command %></h2>
+<%= command.description.truncate(200) %> <br />
 <%= command.mac_only? ? "Mac only" : "" %>
+
+<br />
+<br />

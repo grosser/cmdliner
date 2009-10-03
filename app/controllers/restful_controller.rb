@@ -4,10 +4,15 @@ class RestfulController < ApplicationController
   before_filter :can_read, :only=>%w[show]
 
   make_resourceful do
-    actions :all
+    # all does not work since here the actions are not defined -> explicitly set them
+    actions :index, :show, :edit, :update, :destroy, :new, :create
   end
 
   protected
+
+  def current_objects
+    @current_objects ||= current_model.paginate(:page => params[:page], :per_page => 25)
+  end
 
   def can_create
     can_do(:create)
