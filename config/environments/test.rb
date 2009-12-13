@@ -25,4 +25,5 @@ config.action_mailer.delivery_method = :test
 config.gem "rspec", :version=>">=1.2.8", :lib=>false
 config.gem "rspec-rails", :version=>">=1.2.7.1", :lib=>false
 config.gem "spork", :version=>">=0.5.11", :lib=>false
-config.gem "thoughtbot-factory_girl", :version=>'>=1.2.2', :lib => "factory_girl", :source => "http://gems.github.com"
+config.gem "factory_girl", :version=>'>=1.2.2'
+config.gem "single_test"
